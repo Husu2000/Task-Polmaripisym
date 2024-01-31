@@ -1,0 +1,139 @@
+#include <iostream>
+#include <string>
+#include <cassert>
+using namespace std;
+class Car {
+public:
+    Car(const string& make, const string& model, int year)
+         {}
+
+  virtual  void displayInfo() const {
+        cout << _year << " " << _make << " " << _model << endl;
+    }
+
+    
+    const string& getMake() const {
+        return _make;
+    }
+
+    const string& getModel() const {
+        return _model;
+    }
+
+    int getYear() const {
+        return _year;
+    }
+
+    void setMake(const string newMake) {
+        int len = size(newMake);
+        if (len > 3 && len < 20)
+        {
+        _make = newMake;
+        }    
+            assert(!"Model parametre uygun deyil");
+    }
+
+    void setModel(const string newModel) {
+        int len = size(newModel);
+        if (len> 3 && len < 20)
+        {
+        _model = newModel;
+        }
+            assert(!"Model parametre uygun deyil");
+        
+    }
+
+    void setYear(int newYear) {
+        if (newYear > 1000 && newYear < 2025) assert(!"Yeni il gele bilmedi");
+
+        _year = newYear;
+    }
+private:
+    string _make;
+    string _model;
+    int _year;
+};
+    
+class Manual : public Car {
+public:
+    Manual(const string& make, const string& model, int year, const string& transmissionType)
+        : Car(make, model, year), _transmissionType(transmissionType) {}
+
+    void displayInfo() const override {
+        cout << " Manual" << endl;
+    }
+
+    const string& getTransmissionType() const {
+        return _transmissionType;
+    }
+
+    void setTransmissionType(const string& newTransmissionType) {
+        int len = size(newTransmissionType);
+        if (len > 3 && len < 20)
+        {
+            _transmissionType = newTransmissionType;
+        return;
+        }
+        assert(!"Type  uygun deyil");
+        
+    }
+
+private:
+    string _transmissionType;
+};
+
+class Automatic : public Car {
+public:
+    Automatic(const string& make, const string& model, int year, const string& transmissionType)
+        : Car(make, model, year), _transmissionType(transmissionType) {}
+
+    void displayInfo() const override {
+        cout << " Automatic" << endl;
+    }
+
+    const string& getTransmissionType() const {
+        return _transmissionType;
+    }
+
+    void setTransmissionType(const string& newTransmissionType2) {
+        int len = size(newTransmissionType2);
+        if (len > 3 && len < 20)
+        {
+            _transmissionType = newTransmissionType2;
+            return;
+        }
+        assert(!"Type parametre uygun deyil");
+        
+        
+    }
+
+private:
+    string _transmissionType;
+};
+    
+    
+    
+    
+  
+int main()
+{
+    Manual manualCar("Toyota", "Corolla", 2022, "Manual");
+    Automatic automaticCar("Honda", "Civic", 2023, "Automatic");
+
+    cout << "Manual Car type: " << manualCar.getTransmissionType() << endl;
+    cout << "Automatic Car type: " << automaticCar.getTransmissionType() << endl;
+
+    manualCar.setTransmissionType("Avtomat");
+    automaticCar.setTransmissionType("Mexanika");
+
+    cout << "\Melumatlar yenilendi :\n";
+    manualCar.displayInfo();
+    cout << "Manual masinin type i deyisdi " << manualCar.getTransmissionType() << endl;
+
+    cout << "\n";
+
+    automaticCar.displayInfo();
+    cout << "Avtomatik masinin type i deyisdi " << automaticCar.getTransmissionType() << endl;
+
+}
+
